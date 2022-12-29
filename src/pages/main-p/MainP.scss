@@ -1,0 +1,19 @@
+.main-p {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background-image: url("../../assets/pics/backgammon.jpg");
+  background-size: cover;
+
+  &__c1 {
+    display: flex;
+  }
+
+  &__board {
+    margin-top: 2rem;
+    margin-left: 4rem;
+  }
+}

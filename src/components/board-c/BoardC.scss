@@ -1,0 +1,28 @@
+.board-c {
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    z-index: 2;
+
+    width: 90rem;
+    height: 60rem;
+
+    border: 2px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+#board-c {
+  position: absolute;
+
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1)
+  );
+
+  backdrop-filter: blur(1rem);
+}
