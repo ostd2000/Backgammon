@@ -11,11 +11,11 @@
     width: 90rem;
     height: 60rem;
 
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 3px solid rgba(255, 255, 255, 0.2);
   }
 }
 
-#board-c {
+#board-canvas {
   position: absolute;
 
   background: linear-gradient(
