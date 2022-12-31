@@ -1,86 +1,127 @@
-// Draws a triangle using the coordinates of the starting point (x1, y1),
-// the width the height the color and an option for direction of the triangle (up)
-const drawTriangle = (
-  ctx,
-  x1,
-  y1,
-  width,
-  height,
-  color = "rgba(0, 0, 0, 1)",
-  up = true
-) => {
-  const x2 = x1 + width;
-  const y2 = y1;
-  const x3 = x1 + width / 2;
-  let y3;
-
-  if (up) {
-    y3 = y1 - height;
-  } else {
-    y3 = y1 + height;
-  }
-
-  ctx.fillStyle = color;
-
-  ctx.beginPath();
-  ctx.moveTo(x1, y1);
-  ctx.lineTo(x2, y2);
-  ctx.lineTo(x3, y3);
-  ctx.fill();
-};
-
-// Draws a set of triangles using drawTriangle() function
-const drawGroupTriangle = (ctx, x1, y1, width, height, up = true) => {
-  let x1C = x1;
-
-  for (let i = 1; i <= 6; i++) {
-    if (up) {
-      if (i % 2 === 0) {
-        drawTriangle(ctx, x1C, y1, width, height, "rgba(0, 0, 0, 0.2)", up);
-      } else {
-        drawTriangle(ctx, x1C, y1, width, height, "rgba(0, 0, 0, 0.5)", up);
-      }
-
-      x1C += width;
-    } else {
-      if (i % 2 === 0) {
-        drawTriangle(ctx, x1C, y1, width, height, "rgba(0, 0, 0, 0.5)", false);
-      } else {
-        drawTriangle(ctx, x1C, y1, width, height, "rgba(0, 0, 0, 0.2)", false);
-      }
-
-      x1C += width;
-    }
+import {
+  boardWidth,
+  boardHeight,
+  padding,
+  innerRectangleWidth,
+  innerRectangleHeight,
+  traingleHeight,
+  traingleWidth,
+  trainglePadding,
+  checkerBoxWidth,
+  checkerBoxHeight,
+} from "./constants";
+const drawTraingles = (ctx, x, y, w, p, t, m) => {
+  ctx.fillStyle = "black";
+  for (let i = 0; i < 6; i++) {
+    if (i % 2 === m) ctx.globalAlpha = 0.5;
+    else ctx.globalAlpha = 0.2;
+    ctx.beginPath();
+    let x1 = x + i * w + p;
+    let x2 = x + (i + 1) * w - p;
+    ctx.moveTo(x1, y);
+    ctx.lineTo(x2, y);
+    ctx.lineTo((x2 + x1) / 2, t);
+    ctx.lineTo(x1, y);
+    ctx.fill();
   }
 };
 
+const drawRectangle = (ctx, x, y, w, h) => {
+  ctx.globalAlpha = 0.2;
+  ctx.fillStyle = "black";
+  ctx.fillRect(x, y, w, h);
+  ctx.globalAlpha = 0.1;
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = "white";
+  ctx.strokeRect(x, y, w, h);
+};
 export const drawBoard = (ctx) => {
-  // Color of the inner boards and the checker boxes
-  ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+  //Outside white board
+  ctx.globalAlpha = 0.1;
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = "white";
+  ctx.strokeRect(0, 0, boardWidth, boardHeight);
+  //Inside 1
+  drawRectangle(
+    ctx,
+    padding,
+    padding,
+    innerRectangleWidth,
+    innerRectangleHeight
+  );
+  //Inside 2
+  drawRectangle(
+    ctx,
+    innerRectangleWidth + 3 * padding,
+    padding,
+    innerRectangleWidth,
+    innerRectangleHeight
+  );
 
-  // Left inner board
-  ctx.fillRect(30, 30, 350, 540);
-  ctx.strokeRect(30, 30, 350, 540);
+  //CheckerBox 1
+  drawRectangle(
+    ctx,
+    boardWidth - padding - checkerBoxWidth,
+    padding,
+    checkerBoxWidth,
+    checkerBoxHeight
+  );
 
-  // Right inner board
-  ctx.fillRect(440, 30, 350, 540);
-  ctx.strokeRect(440, 30, 350, 540);
+  //CheckerBox 2
+  drawRectangle(
+    ctx,
+    boardWidth - padding - checkerBoxWidth,
+    boardHeight - padding - checkerBoxHeight,
+    checkerBoxWidth,
+    checkerBoxHeight
+  );
 
-  // Top checker box
-  ctx.fillRect(820, 50, 50, 220);
-  ctx.strokeRect(820, 50, 50, 220);
+  //The middle line
+  ctx.beginPath();
 
-  // Down checker box
-  ctx.fillRect(820, 330, 50, 220);
-  ctx.strokeRect(820, 330, 50, 220);
+  ctx.moveTo(innerRectangleWidth + 2 * padding, 0);
+  ctx.lineTo(innerRectangleWidth + 2 * padding, boardHeight);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = "white";
+  ctx.stroke();
 
-  // Line
-  ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
-  ctx.fillRect(409, 0, 2, 600);
+  //lower Traingles
+  drawTraingles(
+    ctx,
+    padding,
+    padding + 2,
+    traingleWidth,
+    trainglePadding,
+    traingleHeight,
+    0
+  );
+  drawTraingles(
+    ctx,
+    innerRectangleWidth + 3 * padding,
+    padding + 2,
+    traingleWidth,
+    trainglePadding,
+    traingleHeight,
+    0
+  );
+  //Upper traingles
+  drawTraingles(
+    ctx,
+    padding,
+    boardHeight - padding - 2,
+    traingleWidth,
+    trainglePadding,
+    boardHeight - padding - traingleHeight,
+    1
+  );
 
-  drawGroupTriangle(ctx, 30, 570, 58, 220, true);
-  drawGroupTriangle(ctx, 440, 570, 58, 220, true);
-  drawGroupTriangle(ctx, 30, 30, 58, 220, false);
-  drawGroupTriangle(ctx, 440, 30, 58, 220, false);
+  drawTraingles(
+    ctx,
+    innerRectangleWidth + 3 * padding,
+    boardHeight - padding - 2,
+    traingleWidth,
+    trainglePadding,
+    boardHeight - padding - traingleHeight,
+    1
+  );
 };
