@@ -1,0 +1,13 @@
+.avatar-c {
+  position: relative;
+
+  &__img {
+    width: 3.5rem;
+    height: 3.5rem;
+
+    border-radius: 50%;
+
+    outline: 3px solid #263159;
+    outline-offset: 3px;
+  }
+}

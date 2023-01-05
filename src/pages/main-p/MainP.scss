@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
 
-  background-image: url("../../assets/pics/backgammon.jpg");
+  background-image: url("../../assets/pics/Backgammon.jpg");
   background-size: cover;
 
   &__c1 {
@@ -13,7 +13,6 @@
   }
 
   &__board {
-    margin-top: 2rem;
-    margin-left: 4rem;
+    // margin-top: 2rem;
   }
 }
