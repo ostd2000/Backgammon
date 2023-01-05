@@ -1,0 +1,13 @@
+.btn-c {
+  // These are the default settings for the button
+  // these can be changed through the passed "className"
+  // we just have to increase the specificity of that selector
+  width: 12rem;
+  height: 4rem;
+
+  font-size: 1.4rem;
+
+  cursor: pointer;
+  border: 0;
+  border-radius: 5px;
+}

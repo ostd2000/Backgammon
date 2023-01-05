@@ -1,4 +1,105 @@
 .score-board-c {
   width: 30rem;
-  height: 50rem;
+  height: 36rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: relative;
+  z-index: 1;
+
+  font-size: 1.4rem;
+
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1)
+  );
+
+  color: #eaeaea;
+
+  backdrop-filter: blur(1rem);
+
+  border-radius: 8px;
+
+  &::before {
+    content: "";
+
+    width: 30rem;
+    height: 36rem;
+
+    position: absolute;
+    z-index: 2;
+
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+  &__title {
+    font-size: 1.8rem;
+  }
+
+  // Selects everything except the 5th child
+  // & > *:not(:nth-child(5)),
+  // & > *:not(:last-child) {
+  //   margin-top: 2rem;
+  // }
+
+  // Selects everything except the 5th child
+  & > * {
+    margin-top: 2.5rem;
+  }
+
+  &__game-format {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__c1 {
+    display: flex;
+    gap: 4rem;
+  }
+
+  &__c1-1,
+  &__c1-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    margin-top: 1rem;
+  }
+
+  &__user-score {
+    color: #9fe6a0;
+  }
+
+  &__opponent-score {
+    color: #f96666;
+  }
+
+  &__c2 {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  // We don't usually need the first & but here with this we're trying to increase to specificity of this selector
+  // to override the default values for the width and height of the button
+  & &--btn-finish,
+  & &--btn-restart {
+    width: 10rem;
+    height: 3rem;
+
+    color: #ffffff;
+  }
+
+  & &--btn-finish {
+    background-color: #f96666;
+  }
+
+  & &--btn-restart {
+    background-color: #11468f;
+  }
 }

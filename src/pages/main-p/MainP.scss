@@ -10,9 +10,22 @@
 
   &__c1 {
     display: flex;
+    gap: 11.5rem;
+
+    // margin-top: 3rem;
   }
 
-  &__board {
-    // margin-top: 2rem;
+  &__c1-1 {
+    display: flex;
+    flex-direction: column;
+
+    margin-right: 11.5rem;
   }
+
+  &__overall-score {
+    margin-top: 6rem;
+  }
+
+  // &__board {
+  // }
 }
