@@ -36,10 +36,6 @@
     border: 2px solid rgba(255, 255, 255, 0.2);
   }
 
-  &__title {
-    font-size: 1.8rem;
-  }
-
   // Selects everything except the 5th child
   // & > *:not(:nth-child(5)),
   // & > *:not(:last-child) {
@@ -49,6 +45,10 @@
   // Selects everything except the 5th child
   & > * {
     margin-top: 2.5rem;
+  }
+
+  &__title {
+    font-size: 1.8rem;
   }
 
   &__game-format {
