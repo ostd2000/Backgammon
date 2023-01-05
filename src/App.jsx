@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 
 import MainP from "./pages/main-p/MainP";
