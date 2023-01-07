@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import "./BoardC.scss";
 
-import { drawBoard } from "../../utils";
+import { boardWidth, boardHeight } from "../../game/constants";
+import Board from "../../game/board";
 
 const BoardC = ({ className }) => {
   const boardCanvas = useRef();
@@ -9,7 +10,8 @@ const BoardC = ({ className }) => {
   useEffect(() => {
     const ctx = boardCanvas.current.getContext("2d");
 
-    drawBoard(ctx);
+    const board = new Board(boardWidth, boardHeight);
+    board.draw(ctx);
   });
 
   return (
